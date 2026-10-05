@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>world.execute(me); — MV</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-color="green">
+
+<!-- 晃动容器的层（canvases + 歌词 + 闪字） -->
+<div id="app">
+  <!-- 背景：代码雨 -->
+  <canvas id="rain"></canvas>
+  <!-- 中景：字符几何图形 -->
+  <canvas id="stage"></canvas>
+  <!-- 故障切片层 -->
+  <canvas id="glitchfx"></canvas>
+
+  <!-- 中央歌词 -->
+  <div id="lyric-box">
+    <div id="lyric-main" data-text=""></div>
+    <div id="lyric-sub"></div>
+  </div>
+
+  <!-- 全屏闪现大字 -->
+  <div id="flash-text"></div>
+</div>
+
+<!-- HUD：左侧日志终端 -->
+<div id="hud-log" class="hud-panel">
+  <div class="panel-title">/var/log/world.log</div>
+  <div id="log-lines"></div>
+</div>
+
+<!-- HUD：右侧代码编辑器 -->
+<div id="hud-code" class="hud-panel">
+  <div class="panel-title">
+    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+    <span id="code-filename">world.js</span>
+  </div>
+  <pre id="code-content"></pre>
+</div>
+
+<!-- 底部状态栏 -->
+<div id="bottom-bar">
+  <div id="timecode">00:00:00</div>
+  <div id="progress"><div id="progress-fill"></div></div>
+  <div id="progress-pct">0%</div>
+  <div id="beat-lamp"></div>
+</div>
+
+<!-- 对轴模式面板 -->
+<div id="sync-hud" class="hidden"></div>
+
+<!-- 扫描线 & 暗角 -->
+<div id="scanlines"></div>
+<div id="vignette"></div>
+
+<!-- 开始遮罩 -->
+<div id="start-overlay">
+  <div class="start-inner">
+    <div class="start-title">world.execute(<span class="me">me</span>);</div>
+    <div class="start-sub">// a code-driven music video</div>
+
+    <!-- 文件图标按钮 -->
+    <div id="file-icon" class="file-icon">
+      <svg viewBox="0 0 100 140" class="file-svg">
+        <!-- 文件外形 -->
+        <path d="M 10,0 L 70,0 L 90,20 L 90,140 L 10,140 Z"
+              class="file-body"/>
+        <path d="M 70,0 L 70,20 L 90,20"
+              class="file-corner"/>
+
+        <!-- 播放三角形 -->
+        <polygon points="40,60 40,90 65,75"
+                 class="play-triangle"/>
+
+        <!-- 文件名 -->
+        <text x="50" y="115" class="file-name">world.exe</text>
+      </svg>
+      <div class="file-hint">点击开始播放</div>
+    </div>
+  </div>
+</div>
+
+<!-- 结束遮罩 -->
+<div id="end-overlay" class="hidden">
+  <div class="start-inner">
+    <div class="end-line">&gt; process exited with code 0<span class="caret">▌</span></div>
+    <button class="start-btn" onclick="location.reload()">↻ 重新执行 run(again)</button>
+  </div>
+</div>
+
+<script src="js/lyrics.js"></script>
+<script src="js/rain.js"></script>
+<script src="js/shapes.js"></script>
+<script src="js/terminal.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
